@@ -1,0 +1,53 @@
+header:
+  version: 14
+
+machine: raspberrypi4-64-demo
+distro: demo
+target:
+  - demo-image
+
+local_conf_header:
+  demo: |
+    INHERIT += "rm_work"
+    PACKAGE_CLASSES = "package_ipk"
+
+repos:
+  poky:
+    url: https://git.yoctoproject.org/poky
+    branch: kirkstone
+    commit: 2c05660b21c7cc1082aeac8b75d8a2d82e249f63
+    layers:
+      meta:
+      meta-poky:
+      meta-yocto-bsp:
+
+  meta-openembedded:
+    url: https://git.openembedded.org/meta-openembedded
+    branch: kirkstone
+    commit: 97d4be2839754dadfc326c21948472c2fc2985ce
+    layers:
+      meta-oe:
+      meta-python:
+      meta-networking:
+
+  meta-raspberrypi:
+    url: https://git.yoctoproject.org/meta-raspberrypi
+    branch: kirkstone
+    commit: 255500dd9f6a01a3445ac491d1abc401801e3bad
+
+  meta-rauc:
+    url: https://github.com/rauc/meta-rauc.git
+    branch: kirkstone
+    commit: 4cb7c47686d5dec9bacae6110f1bcaac57568691
+
+  meta-rauc-community:
+    url: https://github.com/leon-anavi/meta-rauc-community.git
+    branch: kirkstone
+    commit: a24bd25bc1f871782fc956f9a3104256cac16691
+    layers:
+      meta-rauc-raspberrypi:
+
+  meta-demo:
+    path: .
+    layers:
+      meta-demo:

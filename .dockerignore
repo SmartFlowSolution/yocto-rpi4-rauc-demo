@@ -1,0 +1,48 @@
+# Yocto build output
+build/
+tmp*/
+sstate-cache/
+downloads/
+cache/
+
+# External layers fetched by kas
+poky/
+meta-openembedded/
+meta-raspberrypi/
+meta-rauc/
+meta-rauc-community/
+
+# Release artifacts
+release/
+*.wic
+*.wic.*
+*.bmap
+*.raucb
+*.tar.gz
+*.sha256
+SHA256SUMS
+manifest.json
+
+# SDK installers
+*-toolchain-*.sh
+oecore-*.sh
+
+# Local secrets and provisioning material
+certs/
+secrets/
+local-provisioning/
+*.key
+*.pem
+*.ovpn
+*.auth-token
+
+# VCS and editor noise
+.git/
+.github/
+.agents/
+.codex/
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
