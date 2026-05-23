@@ -1,0 +1,12 @@
+[Unit]
+Description=Prepare persistent demo data directories
+After=local-fs.target
+RequiresMountsFor=/data
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/demo/data-layout.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
