@@ -11,7 +11,10 @@ IMAGE_INSTALL:append = " \
     systemd-conf \
     util-linux \
     data-layout \
+    network-config \
+    iproute2 \
     telemetry-demo \
+    vpn-provisioning \
 "
 
 ensure_demo_users() {
@@ -37,7 +40,17 @@ ensure_demo_users() {
     usermod -R ${IMAGE_ROOTFS} -L demo
 }
 
-ROOTFS_POSTPROCESS_COMMAND += "ensure_demo_users; "
+install_demo_network_tools_links() {
+    install -d ${IMAGE_ROOTFS}${bindir}
+
+    if [ -x ${IMAGE_ROOTFS}${base_sbindir}/ip ] && [ ! -e ${IMAGE_ROOTFS}${bindir}/ip ]; then
+        ln -s ${base_sbindir}/ip ${IMAGE_ROOTFS}${bindir}/ip
+    elif [ -x ${IMAGE_ROOTFS}${sbindir}/ip ] && [ ! -e ${IMAGE_ROOTFS}${bindir}/ip ]; then
+        ln -s ${sbindir}/ip ${IMAGE_ROOTFS}${bindir}/ip
+    fi
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "ensure_demo_users; install_demo_network_tools_links; "
 
 IMAGE_FSTYPES = "tar.bz2 ext4 wic wic.bz2 wic.bmap"
 SDIMG_ROOTFS_TYPE = "ext4"

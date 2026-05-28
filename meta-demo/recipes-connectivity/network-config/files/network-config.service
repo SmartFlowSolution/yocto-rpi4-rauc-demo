@@ -1,0 +1,15 @@
+[Unit]
+Description=Apply optional static IP configuration
+After=local-fs.target data-layout.service systemd-networkd.service
+Requires=data-layout.service
+Wants=systemd-networkd.service
+Before=systemd-networkd-wait-online.service network-online.target
+ConditionPathExists=/data/config/static-ip.conf
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/demo/network-config.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
