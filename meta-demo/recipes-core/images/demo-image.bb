@@ -18,6 +18,10 @@ IMAGE_INSTALL:append = " \
     iptables \
     iptables-modules \
     firewall-hardening \
+    curl \
+    jq \
+    nano \
+    sqlite3 \
     ca-certificates \
     openssh \
     openssh-keygen \
