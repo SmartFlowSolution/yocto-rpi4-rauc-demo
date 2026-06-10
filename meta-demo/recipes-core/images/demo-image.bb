@@ -27,6 +27,7 @@ IMAGE_INSTALL:append = " \
     openssh-keygen \
     openssh-sftp-server \
     kernel-module-tun \
+    rauc \
     telemetry-demo \
     vpn-provisioning \
 "
