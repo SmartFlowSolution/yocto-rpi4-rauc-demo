@@ -1,0 +1,13 @@
+[Unit]
+Description=Demo VPN provisioning hook
+After=network-online.target data-layout.service
+Wants=network-online.target
+Requires=data-layout.service
+ConditionPathExists=/data/config/device-id
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/demo/vpn-provisioning.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Demo firewall baseline
+After=network-pre.target
+Before=network.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/demo-firewall
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
