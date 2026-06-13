@@ -1,0 +1,34 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Shell syntax
+        run: |
+          bash -n scripts/build.sh
+          bash -n scripts/release.sh
+          bash -n scripts/flash.sh
+          sh -n meta-demo/recipes-core/data-layout/files/data-layout.sh
+          sh -n meta-demo/recipes-connectivity/vpn-provisioning/files/vpn-provisioning.sh
+          sh -n meta-demo/recipes-security/firewall/files/firewall.sh
+
+      - name: Check for business-specific strings
+        run: |
+          business_a='power'
+          business_b='flux'
+          secret_a='token'
+          secret_b='auth'
+          vpn_a='client'
+          vpn_b='ovpn'
+          app_a='pf'
+          app_b='logger'
+          private_a='private'
+          private_b='key'
+          ! git grep -niE "${business_a}${business_b}|${business_a}${business_b}[.]org|${secret_a}[.]${secret_b}|${vpn_a}[.]${vpn_b}|${private_a}_${private_b}|${app_a}-${app_b}"
